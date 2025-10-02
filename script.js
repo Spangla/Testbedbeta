@@ -28,7 +28,15 @@ function calculate() {
     }
   }
 
-  let pumpCost = pumpRequired ? 350 : 0;
+  let pumpCost = 0;
+if (pumpRequired) {
+  if (document.getElementById("longRun").checked) {
+    pumpCost = 400;  // Pump with Long Run
+  } else {
+    pumpCost = 350;  // Regular Pump
+  }
+}
+
 
   let waitingCost = 0;
   if (waitingToggle) {
@@ -59,6 +67,16 @@ function calculate() {
 
   document.getElementById("results").textContent = results;
 }
+// Toggle visibility of Long Run input
+document.getElementById("pump").addEventListener("change", function() {
+  const longRunDiv = document.getElementById("longRunOption");
+  if (this.checked) {
+    longRunDiv.style.display = "block";
+  } else {
+    longRunDiv.style.display = "none";
+    document.getElementById("longRun").checked = false; // reset if unchecked
+  }
+});
 
 // Toggle visibility of custom delivery input
 document.getElementById("customDeliveryToggle").addEventListener("change", function() {
