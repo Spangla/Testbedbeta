@@ -2,6 +2,7 @@ function calculate() {
   const metres = parseFloat(document.getElementById("metres").value) || 0;
   const rate = parseFloat(document.getElementById("product").value);
   const pumpRequired = document.getElementById("pump").checked;
+  const pumpLongRequired = document.getElementById("pumpLong").checked;
   const customDeliveryToggle = document.getElementById("customDeliveryToggle").checked;
   const customDelivery = parseFloat(document.getElementById("customDelivery").value) || 0;
   const waitingToggle = document.getElementById("waitingToggle").checked;
@@ -9,11 +10,12 @@ function calculate() {
 
   let materialCost = metres * rate;
 
+  // Delivery
   let deliveryCost = 0;
   if (customDeliveryToggle) {
     deliveryCost = customDelivery;
   } else {
-    if (pumpRequired) {
+    if (pumpRequired || pumpLongRequired) {
       if (metres <= 2) deliveryCost = 60;
       else if (metres <= 3) deliveryCost = 60;
       else if (metres <= 5) deliveryCost = 50;
@@ -28,16 +30,11 @@ function calculate() {
     }
   }
 
-  let pumpCost = 0;
-if (pumpRequired) {
-  if (document.getElementById("longRun").checked) {
-    pumpCost = 400;  // Pump with Long Run
-  } else {
-    pumpCost = 350;  // Regular Pump
-  }
-}
+  // Pump costs
+  let pumpCost = pumpRequired ? 350 : 0;
+  let pumpCostLong = pumpLongRequired ? 400 : 0;
 
-
+  // Waiting time
   let waitingCost = 0;
   if (waitingToggle) {
     if (metres <= 3) {
@@ -51,14 +48,17 @@ if (pumpRequired) {
     }
   }
 
-  let subtotal = materialCost + deliveryCost + pumpCost + waitingCost;
+  // Totals
+  let subtotal = materialCost + deliveryCost + pumpCost + pumpCostLong + waitingCost;
   let vat = subtotal * 0.2;
   let total = subtotal + vat;
 
+  // Display
   let results = "----------------------------\n";
   results += `Material Cost: £${materialCost.toFixed(2)}\n`;
   results += `Delivery: £${deliveryCost.toFixed(2)}\n`;
   if (pumpRequired) results += `Pump: £${pumpCost.toFixed(2)}\n`;
+  if (pumpLongRequired) results += `Long Run: £${pumpCostLong.toFixed(2)}\n`;
   if (waitingToggle) results += `Waiting Time: £${waitingCost.toFixed(2)}\n`;
   results += `Subtotal: £${subtotal.toFixed(2)}\n`;
   results += `VAT: £${vat.toFixed(2)}\n`;
@@ -67,23 +67,13 @@ if (pumpRequired) {
 
   document.getElementById("results").textContent = results;
 }
-// Toggle visibility of Long Run input
-document.getElementById("pump").addEventListener("change", function() {
-  const longRunDiv = document.getElementById("longRunOption");
-  if (this.checked) {
-    longRunDiv.style.display = "block";
-  } else {
-    longRunDiv.style.display = "none";
-    document.getElementById("longRun").checked = false; // reset if unchecked
-  }
-});
 
-// Toggle visibility of custom delivery input
+// Toggle visibility for delivery and waiting
 document.getElementById("customDeliveryToggle").addEventListener("change", function() {
   document.getElementById("customDelivery").style.display = this.checked ? "block" : "none";
 });
 
-// Toggle visibility of waiting time input
 document.getElementById("waitingToggle").addEventListener("change", function() {
   document.getElementById("waitingMinutes").style.display = this.checked ? "block" : "none";
 });
+
