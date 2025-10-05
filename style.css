@@ -1,6 +1,6 @@
-/* === BODY AND CONTAINER === */
+/* === BODY === */
 body {
-  background-color: #0b0b3b; /* dark blue */
+  background-color: #001f3f; /* navy blue */
   color: #fff;
   font-family: Arial, sans-serif;
   margin: 0;
@@ -9,6 +9,7 @@ body {
   justify-content: center;
 }
 
+/* === CONTAINER === */
 .container {
   width: 100%;
   max-width: 480px;
@@ -17,105 +18,87 @@ body {
   align-items: center; /* everything centered */
 }
 
-/* HEADER */
+/* === HEADINGS === */
 h1 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+  font-weight: bold;
 }
 
-/* FORM ROWS */
+/* === FORM ROWS === */
 .form-row {
   display: flex;
   flex-direction: column; /* stack label and input */
   align-items: center;
   width: 90%;
-  margin: 10px 0;
+  margin: 12px 0;
 }
 
+/* Labels */
 .form-row label {
-  font-size: 1rem;
-  color: #fff;
-  background-color: #0b0b3b;
-  border: 2px solid #007bff;
-  border-radius: 8px;
-  padding: 10px;
-  width: 100%;
-  text-align: center;
-  transition: background-color 0.3s, transform 0.2s;
+  font-size: 1.1rem;
+  margin-bottom: 6px;
   cursor: pointer;
 }
 
-.form-row label:hover {
-  background-color: #1a1a6b;
-  transform: scale(1.02);
-}
-
+/* Inputs and select */
 .form-row input[type="number"],
 .form-row select {
   width: 80%;
-  padding: 8px;
-  margin: 8px 0 0 0;
-  border-radius: 6px;
-  border: 1px solid #007bff;
-  background-color: #0b0b3b;
+  padding: 10px;
+  border: none;          /* no surrounding box */
+  border-radius: 6px;    /* subtle rounding */
+  background-color: #003366; /* slightly lighter navy */
   color: #fff;
   text-align: center;
+  font-size: 1rem;
 }
 
-/* RADIO BUTTONS */
-.form-row input[type="radio"] {
-  accent-color: #007bff;
-  transform: scale(1.4);
-  margin-right: 10px;
-  cursor: pointer;
-}
-
-/* CHECKBOXES */
+/* Radio Buttons & Checkboxes */
+.form-row input[type="radio"],
 .form-row input[type="checkbox"] {
-  accent-color: #007bff;
-  transform: scale(1.2);
-  margin-right: 10px;
+  accent-color: #ffcc00; /* gold highlight */
+  transform: scale(1.3);
+  margin-right: 8px;
   cursor: pointer;
 }
 
-/* BUTTON */
+/* Button */
 button {
-  padding: 12px 25px;
+  padding: 12px 28px;
   font-size: 1.2rem;
-  border-radius: 10px;
+  border-radius: 8px;
   border: none;
-  background-color: #007bff;
-  color: #fff;
+  background-color: #ffcc00; /* gold button */
+  color: #001f3f;           /* text contrasts button */
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
 button:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 15px rgba(0,123,255,0.7);
+  box-shadow: 0 0 15px rgba(255,204,0,0.7);
 }
 
 /* === RESULTS / RECEIPT BOX === */
 #results {
-  background-color: #0b0b3b;       /* dark blue */
-  border: 2px solid #007bff;
-  border-radius: 15px;
-  padding: 25px 20px;
-  margin: 20px auto;               /* centered */
+  background-color: #003366; /* slightly lighter navy */
+  border-radius: 12px;
+  padding: 30px 20px;
+  margin: 20px auto;
   width: 95%;
-  max-width: 420px;
+  max-width: 480px;
   text-align: center;
-  font-size: 1.4rem;               /* larger font */
-  line-height: 1.8;                /* more spacing */
+  font-size: 1.4rem;
+  line-height: 1.8;
   white-space: pre-wrap;
   box-sizing: border-box;
-  max-height: 320px;               /* scrollable on small screens */
-  overflow-y: auto;
-  box-shadow: 0 0 20px rgba(0,123,255,0.6); /* glow */
+  box-shadow: 0 0 20px rgba(255,204,0,0.5); /* subtle glow */
   transition: box-shadow 0.3s;
 }
 
 #results:hover {
-  box-shadow: 0 0 30px rgba(0,123,255,0.9); /* stronger glow on hover */
+  box-shadow: 0 0 30px rgba(255,204,0,0.8);
 }
 
