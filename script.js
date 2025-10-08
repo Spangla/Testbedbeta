@@ -1,33 +1,30 @@
 function calculate() {
   const metres = parseFloat(document.getElementById("metres").value) || 0;
   const rate = parseFloat(document.getElementById("product").value);
-  const pumpRequired = document.getElementById("pump").checked;
-  const pumpLongRequired = document.getElementById("pumpLong").checked;
+
+  // Pump buttons
+  const pumpRequired = document.getElementById("pumpButton").classList.contains("active");
+  const pumpLongRequired = document.getElementById("longPumpButton").classList.contains("active");
+
+  // Delivery + waiting toggles
   const customDeliveryToggle = document.getElementById("customDeliveryToggle").checked;
   const customDelivery = parseFloat(document.getElementById("customDelivery").value) || 0;
   const waitingToggle = document.getElementById("waitingToggle").checked;
   const waitingMinutes = parseInt(document.getElementById("waitingMinutes").value) || 0;
 
+  // Material cost
   let materialCost = metres * rate;
 
-  // Delivery
+  // 🚚 Updated delivery cost bands
   let deliveryCost = 0;
   if (customDeliveryToggle) {
     deliveryCost = customDelivery;
   } else {
-    if (pumpRequired || pumpLongRequired) {
-      if (metres <= 2) deliveryCost = 60;
-      else if (metres <= 3) deliveryCost = 60;
-      else if (metres <= 5) deliveryCost = 50;
-      else if (metres <= 7) deliveryCost = 40;
-      else deliveryCost = 20;
-    } else {
-      if (metres <= 2) deliveryCost = 90;
-      else if (metres <= 3) deliveryCost = 80;
-      else if (metres <= 5) deliveryCost = 60;
-      else if (metres <= 7) deliveryCost = 50;
-      else deliveryCost = 40;
-    }
+    if (metres <= 2) deliveryCost = 90;
+    else if (metres <= 4) deliveryCost = 80;
+    else if (metres <= 6) deliveryCost = 70;
+    else if (metres <= 10) deliveryCost = 50;
+    else deliveryCost = 0; // Optional: free delivery or adjust if needed
   }
 
   // Pump costs
@@ -68,12 +65,28 @@ function calculate() {
   document.getElementById("results").textContent = results;
 }
 
-// Toggle visibility for delivery and waiting
-document.getElementById("customDeliveryToggle").addEventListener("change", function() {
+// Toggle custom delivery visibility
+document.getElementById("customDeliveryToggle").addEventListener("change", function () {
   document.getElementById("customDelivery").style.display = this.checked ? "block" : "none";
 });
 
-document.getElementById("waitingToggle").addEventListener("change", function() {
+// Toggle waiting time visibility
+document.getElementById("waitingToggle").addEventListener("change", function () {
   document.getElementById("waitingMinutes").style.display = this.checked ? "block" : "none";
 });
 
+// Pump button toggle logic
+const pumpButton = document.getElementById("pumpButton");
+const longPumpButton = document.getElementById("longPumpButton");
+
+pumpButton.addEventListener("click", function () {
+  const isActive = this.classList.contains("active");
+  this.classList.toggle("active", !isActive);
+  longPumpButton.classList.remove("active");
+});
+
+longPumpButton.addEventListener("click", function () {
+  const isActive = this.classList.contains("active");
+  this.classList.toggle("active", !isActive);
+  pumpButton.classList.remove("active");
+});
