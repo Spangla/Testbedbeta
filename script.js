@@ -2,11 +2,11 @@ function calculate() {
   const metres = parseFloat(document.getElementById("metres").value) || 0;
   const rate = parseFloat(document.getElementById("product").value);
 
-  // Pump buttons
-  const pumpRequired = document.getElementById("pumpButton").classList.contains("active");
-  const pumpLongRequired = document.getElementById("longPumpButton").classList.contains("active");
+  // Pump checkboxes
+  const pumpRequired = document.getElementById("pump").checked;
+  const pumpLongRequired = document.getElementById("pumpLong").checked;
 
-  // Delivery + waiting toggles
+  // Custom delivery + waiting time toggles
   const customDeliveryToggle = document.getElementById("customDeliveryToggle").checked;
   const customDelivery = parseFloat(document.getElementById("customDelivery").value) || 0;
   const waitingToggle = document.getElementById("waitingToggle").checked;
@@ -15,7 +15,7 @@ function calculate() {
   // Material cost
   let materialCost = metres * rate;
 
-  // 🚚 Updated delivery cost bands
+  // 🚚 Updated delivery cost bands (fixed regardless of pump)
   let deliveryCost = 0;
   if (customDeliveryToggle) {
     deliveryCost = customDelivery;
@@ -24,7 +24,7 @@ function calculate() {
     else if (metres <= 4) deliveryCost = 80;
     else if (metres <= 6) deliveryCost = 70;
     else if (metres <= 10) deliveryCost = 50;
-    else deliveryCost = 0; // Optional: free delivery or adjust if needed
+    else deliveryCost = 0; // Optional: free delivery if >10m³
   }
 
   // Pump costs
@@ -50,7 +50,7 @@ function calculate() {
   let vat = subtotal * 0.2;
   let total = subtotal + vat;
 
-  // Display
+  // Display receipt
   let results = "----------------------------\n";
   results += `Material Cost: £${materialCost.toFixed(2)}\n`;
   results += `Delivery: £${deliveryCost.toFixed(2)}\n`;
@@ -75,18 +75,15 @@ document.getElementById("waitingToggle").addEventListener("change", function () 
   document.getElementById("waitingMinutes").style.display = this.checked ? "block" : "none";
 });
 
-// Pump button toggle logic
-const pumpButton = document.getElementById("pumpButton");
-const longPumpButton = document.getElementById("longPumpButton");
-
-pumpButton.addEventListener("click", function () {
-  const isActive = this.classList.contains("active");
-  this.classList.toggle("active", !isActive);
-  longPumpButton.classList.remove("active");
+// Ensure only one pump type can be active
+document.getElementById("pump").addEventListener("change", function () {
+  if (this.checked) {
+    document.getElementById("pumpLong").checked = false;
+  }
+});
+document.getElementById("pumpLong").addEventListener("change", function () {
+  if (this.checked) {
+    document.getElementById("pump").checked = false;
+  }
 });
 
-longPumpButton.addEventListener("click", function () {
-  const isActive = this.classList.contains("active");
-  this.classList.toggle("active", !isActive);
-  pumpButton.classList.remove("active");
-});
