@@ -1,22 +1,20 @@
-const CACHE_NAME = "monster-mix-cache-v3";
-const FILES_TO_CACHE = [
-  "./",
-  "./index.html",
-  "./style.css",
-  "./script.js",
-  "./manifest.json",
-  "./icon-192.png",
-  "./icon-512.png"
-];
-
-self.addEventListener("install", event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(FILES_TO_CACHE))
+self.addEventListener("install", (e) => {
+  e.waitUntil(
+    caches.open("monster-mix-beta-v1").then((cache) => {
+      return cache.addAll([
+        "/monster-mix-beta/",
+        "/monster-mix-beta/index.html",
+        "/monster-mix-beta/style.css",
+        "/monster-mix-beta/script.js",
+        "/monster-mix-beta/icon-192-beta.png",
+        "/monster-mix-beta/icon-512-beta.png"
+      ]);
+    })
   );
 });
 
-self.addEventListener("fetch", event => {
-  event.respondWith(
-    fetch(event.request).catch(() => caches.match(event.request))
+self.addEventListener("fetch", (e) => {
+  e.respondWith(
+    caches.match(e.request).then((response) => response || fetch(e.request))
   );
 });
