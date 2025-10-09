@@ -1,7 +1,7 @@
 {
-  "name": "Monster Mix Beta",
+  "name": "Testbedbeta",
   "short_name": "MonsterMix",
-  "start_url": "/monster-mix-beta/index.html",
+  "start_url": "/Testbedbeta/index.html",
   "display": "standalone",
   "background_color": "#003366",
   "theme_color": "#003366",
