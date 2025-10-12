@@ -5,7 +5,7 @@ self.addEventListener('install', (e) => {
   e.waitUntil(
     caches.open(CACHE_NAME).then(cache =>
       cache.addAll([
-       '/monster-mix-beta/',
+       '/Monster Mix/',
         '/monster-mix-beta/index.html',
         '/monster-mix-beta/style.css',
         '/monster-mix-beta/script.js',
