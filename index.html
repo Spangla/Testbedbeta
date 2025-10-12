@@ -14,6 +14,16 @@
   <div class="container">
 
     <h1>Monster Mix Concrete & Pumps</h1>
+    
+    <div class="input-row">
+  <input type="number" id="length" placeholder="Length">
+  <input type="number" id="width" placeholder="Width">
+  <input type="number" id="depth" placeholder="Depth">
+</div>
+    
+    <div class="form-row">
+  <button id="calcM3Btn" onclick="calculatem3()">Calculate (m³)</button>
+</div>
 
     <!-- Metres Input -->
     <div class="form-row">
@@ -56,7 +66,7 @@
 
     <!-- Calculate Button -->
     <div class="form-row">
-      <button onclick="calculate()">Calculate</button>
+      <button onclick="calculate()">Calculate Total</button>
     </div>
 
     <!-- Results / Receipt Box -->
