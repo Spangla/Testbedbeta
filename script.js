@@ -1,3 +1,16 @@
+function calculatem3() {
+  const length = parseFloat(document.getElementById("length").value) || 0;
+  const width = parseFloat(document.getElementById("width").value) || 0;
+  const depth = parseFloat(document.getElementById("depth").value) || 0;
+
+  const volume = length * width * depth;
+
+  if (volume > 0) {
+    document.getElementById("metres").value = volume.toFixed(2);
+  }
+}
+
+
 function calculate() {
   const metres = parseFloat(document.getElementById("metres").value) || 0;
   const rate = parseFloat(document.getElementById("product").value);
@@ -86,4 +99,3 @@ document.getElementById("pumpLong").addEventListener("change", function () {
     document.getElementById("pump").checked = false;
   }
 });
-
