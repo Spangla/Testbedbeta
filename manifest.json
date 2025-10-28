@@ -1,7 +1,7 @@
 {
   "name": "Monster Mix! Mike's the best!",
   "short_name": "MonsterMix",
-  "start_url": "./index.html",
+  "start_url": "./?source=pwa",
   "display": "standalone",
   "background_color": "#003366",
   "theme_color": "#003366",
