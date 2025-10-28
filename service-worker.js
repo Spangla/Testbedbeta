@@ -1,17 +1,44 @@
+const CACHE_NAME = 'Testbedbeta-v1'; // bump version when updating files
 
-const CACHE_NAME = 'Testbedbeta'; // bump this whenever assets change
+const ASSETS_TO_CACHE = [
+  './',
+  './index.html',
+  './style.css',
+  './script.js',
+  './manifest.json',
+  './icon-192-beta.png',
+  './icon-512-beta.png'
+];
 
-self.addEventListener('install', (e) => {
-  e.waitUntil(
-    caches.open(CACHE_NAME).then(cache =>
-      cache.addAll([
-       '/Testbedbeta/',
-        '/Testbedbeta/index.html',
-        '/Testbedbeta/style.css',
-        '/Testbedbeta/script.js',
-        '/Testbedbeta/icon-192-beta.png',
-        '/Testbedbeta/icon-512-beta.png'
-      ])
+// Install event: cache essential files
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(ASSETS_TO_CACHE);
+    })
+  );
+});
+
+// Activate event: clean up old caches if needed
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(
+        keys.map((key) => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
+          }
+        })
+      )
     )
+  );
+});
+
+// Fetch event: serve cached files when offline
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
+    })
   );
 });
