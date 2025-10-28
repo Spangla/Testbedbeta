@@ -12,7 +12,7 @@ function calculatem3() {
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw/service-worker.js') // adjust path if needed
+    navigator.serviceWorker.register('./service-worker.js') // adjust path if needed
       .then(reg => console.log('✅ Service Worker registered:', reg))
       .catch(err => console.error('❌ Service Worker registration failed:', err));
   });
