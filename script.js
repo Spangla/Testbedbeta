@@ -10,6 +10,13 @@ function calculatem3() {
   }
 }
 
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js')
+      .then(reg => console.log('✅ Service Worker registered:', reg))
+      .catch(err => console.error('❌ Service Worker registration failed:', err));
+  });
+}
 
 function calculate() {
   const metres = parseFloat(document.getElementById("metres").value) || 0;
