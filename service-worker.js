@@ -1,4 +1,4 @@
-const CACHE_NAME = 'Testbedbeta-v2'; // bump version when updating files
+const CACHE_NAME = 'Testbedbeta-v3'; // bump version when updating files
 
 const ASSETS_TO_CACHE = [
   './',
