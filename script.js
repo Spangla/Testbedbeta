@@ -43,7 +43,9 @@ function calculate() {
     if (metres <= 2) deliveryCost = 90;
     else if (metres <= 4) deliveryCost = 80;
     else if (metres <= 6) deliveryCost = 70;
-    else if (metres <= 10) deliveryCost = 50;
+    else if (metres <= 8) deliveryCost = 60;
+    else if (metres <= 11) deliveryCost = 50;
+    else if (metres <= 30) deliveryCost = 90;
     else deliveryCost = 0; // Optional: free delivery if >10m³
   }
 
